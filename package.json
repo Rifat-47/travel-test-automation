@@ -1,0 +1,32 @@
+{
+  "name": "travel-test-automation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Playwright test automation for the Travel customer site",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test tests/smoke",
+    "test:features": "playwright test tests/features --pass-with-no-tests",
+    "test:headed": "playwright test --headed",
+    "test:id": "playwright test -g",
+    "report": "playwright show-report",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:cases": "node scripts/checkTestCases.js",
+    "check": "npm run lint && npm run format:check && npm run check:cases && playwright test --list"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.65.1",
+    "dotenv": "18.0.10",
+    "eslint": "10.15.0",
+    "eslint-plugin-playwright": "2.12.2",
+    "globals": "17.14.0",
+    "prettier": "3.10.1"
+  }
+}
