@@ -7,4 +7,3 @@ export function requireEnv(name) {
 }
 
 export const baseUrl = () => process.env.BASE_URL || 'http://localhost:5173';
-export const apiOrigin = () => process.env.API_ORIGIN || baseUrl();

@@ -3,9 +3,9 @@ import { requireEnv } from '../config/env.js';
 
 const uniqueTag = () => randomUUID().replaceAll('-', '').slice(0, 16);
 
-/** An unused plus alias of the test mailbox. */
+/** An unused plus alias of the customer's mailbox. */
 export function newEmail() {
-  const [name, domain] = requireEnv('TEST_MAILBOX').toLowerCase().split('@');
+  const [name, domain] = requireEnv('CUSTOMER_EMAIL').toLowerCase().split('@');
   return `${name}+${uniqueTag()}@${domain}`;
 }
 
