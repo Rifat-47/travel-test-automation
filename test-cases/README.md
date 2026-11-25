@@ -5,7 +5,7 @@ One document per feature, worked through in this order.
 | Feature ID | Feature | Status |
 | --- | --- | --- |
 | TRV-0 | [Smoke](TRV-0-smoke.md) | Automated |
-| TRV-1 | Registration | Next |
+| TRV-1 | [Registration](TRV-1-registration.md) | Automated |
 | TRV-2 | Login, logout and session | Planned |
 | TRV-3 | Forgot and reset password | Planned |
 | TRV-4 | Navigation, footer and theme | Planned |
