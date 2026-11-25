@@ -76,4 +76,4 @@ A guest creates a customer account and is signed in straight away. There is no e
 
 | # | Bug | Steps to Reproduce | Cases | Issue |
 | --- | --- | --- | --- | --- |
-| 1 | The first click on Show password is lost when leaving Confirm password raises an error | On `/register` at 1280×720, enter different values in Password, then Confirm password; without leaving the field, click the show button of Password. `Passwords do not match` appears, the form moves up, and the password stays hidden. | TRV-1-REG37 | Travel issue 7 |
+| 1 | The first click on Show password is lost when leaving Confirm password raises an error | On `/register` at 1280×720, enter different values in Password, then Confirm password; without leaving the field, click the show button of Password. `Passwords do not match` appears, the form moves up, and the password stays hidden. | TRV-1-REG37 | |
