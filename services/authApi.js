@@ -12,11 +12,20 @@ export async function loginByApi(request, { email, password }) {
   return response.json();
 }
 
-/** Creates an account through the API, for tests that need one to exist already. */
+/**
+ * Creates an account through the API, for tests that need one to exist already.
+ * Returns { access, refresh, user } for the new account.
+ */
 export async function registerByApi(request, { firstName, lastName, email, password }) {
   const response = await request.post(`${baseUrl()}/api/v1/auth/register/`, {
     data: { first_name: firstName, last_name: lastName, email, password, password2: password },
     timeout: testConfig.timeouts.registration,
   });
   if (!response.ok()) throw new Error(`Account setup failed: HTTP ${response.status()}`);
+  return response.json();
+}
+
+/** Asks for a new sign-in with a refresh token. Returns the raw response. */
+export function refreshByApi(request, refresh) {
+  return request.post(`${baseUrl()}/api/v1/auth/token/refresh/`, { data: { refresh } });
 }

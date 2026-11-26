@@ -1,6 +1,11 @@
 import { test as base, expect, request as playwrightRequest } from '@playwright/test';
 import { baseUrl, requireEnv } from '../config/env.js';
-import { loginByApi } from '../services/authApi.js';
+import { newCustomer } from '../data/customers.js';
+import { loginByApi, registerByApi } from '../services/authApi.js';
+
+// Where the app keeps its sign-in in localStorage.
+const ACCESS_KEY = 'travello_access';
+const REFRESH_KEY = 'travello_refresh';
 
 // Access tokens last 60 minutes. Renewing early stops the app from rotating the
 // shared refresh token, which would invalidate it for the tests that follow.
@@ -19,8 +24,8 @@ async function createStorageState() {
         {
           origin: new URL(baseUrl()).origin,
           localStorage: [
-            { name: 'travello_access', value: access },
-            { name: 'travello_refresh', value: refresh },
+            { name: ACCESS_KEY, value: access },
+            { name: REFRESH_KEY, value: refresh },
           ],
         },
       ],
@@ -30,8 +35,45 @@ async function createStorageState() {
   }
 }
 
-/** Guest tests. Nobody is signed in. */
-export const test = base;
+/** Replaces the sign-in kept in the page's browser. Reload or navigate to apply it. */
+export async function storeTokens(page, { access, refresh }) {
+  await page.evaluate(
+    ([keys, values]) => keys.forEach((key, i) => localStorage.setItem(key, values[i])),
+    [
+      [ACCESS_KEY, REFRESH_KEY],
+      [access, refresh],
+    ],
+  );
+}
+
+/** Reads the sign-in kept in the page's browser; null where nothing is kept. */
+export function readTokens(page) {
+  return page.evaluate(
+    ([accessKey, refreshKey]) => ({
+      access: localStorage.getItem(accessKey),
+      refresh: localStorage.getItem(refreshKey),
+    }),
+    [ACCESS_KEY, REFRESH_KEY],
+  );
+}
+
+/**
+ * Guest tests. Nobody is signed in until a test calls signedIn(path), which
+ * registers a new customer, signs them in, opens path and returns
+ * { ...details, access, refresh }. That customer is the test's own, so it may log out.
+ */
+export const test = base.extend({
+  signedIn: async ({ page, request }, use) => {
+    await use(async (path = '/', overrides = {}) => {
+      const customer = newCustomer(overrides);
+      const { access, refresh } = await registerByApi(request, customer);
+      await page.goto('/');
+      await storeTokens(page, { access, refresh });
+      await page.goto(path);
+      return { ...customer, access, refresh };
+    });
+  },
+});
 
 /**
  * Signed-in tests: one login per worker, reused by every test it runs.

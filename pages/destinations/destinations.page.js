@@ -4,6 +4,7 @@ export class DestinationsPage {
     this.firstDestination = page.locator('main a[href^="/destinations/"]').first();
     // On a destination's details page.
     this.registerPrompt = page.getByRole('link', { name: "Don't have an account? Register" });
+    this.loginToBook = page.getByRole('link', { name: 'Login to Book' });
   }
 
   async open() {
