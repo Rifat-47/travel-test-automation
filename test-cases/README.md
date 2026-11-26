@@ -28,4 +28,4 @@ The admin panel comes after the customer side.
 
 - Documents never reference code files, of the app or of the automation.
 - IDs look like `TRV-1-REG01` and are never reused.
-- Security bugs are reported privately and never listed here: this repo is public.
+- Every bug found goes in the Bugs table at the bottom of its feature's document.
