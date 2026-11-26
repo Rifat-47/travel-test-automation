@@ -6,7 +6,7 @@ One document per feature, worked through in this order.
 | --- | --- | --- |
 | TRV-0 | [Smoke](TRV-0-smoke.md) | Automated |
 | TRV-1 | [Registration](TRV-1-registration.md) | Automated |
-| TRV-2 | Login, logout and session | Planned |
+| TRV-2 | [Login, logout and session](TRV-2-login.md) | Automated |
 | TRV-3 | Forgot and reset password | Planned |
 | TRV-4 | Navigation, footer and theme | Planned |
 | TRV-5 | Home | Planned |
@@ -28,4 +28,4 @@ The admin panel comes after the customer side.
 
 - Documents never reference code files, of the app or of the automation.
 - IDs look like `TRV-1-REG01` and are never reused.
-- Security bugs are reported privately and never listed here: this repo is public.
+- Every bug found goes in the Bugs table at the bottom of its feature's document.
