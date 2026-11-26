@@ -23,7 +23,7 @@ for (const file of globSync('test-cases/*.md')) {
 
 for (const file of globSync('tests/**/*.spec.js')) {
   const titles = readFileSync(file, 'utf8').matchAll(
-    /\btest(?:\.(?:fail|skip|fixme|only))?\(\s*(['"`])(.*?)\1/g,
+    /\b(?:test|customerTest)(?:\.(?:fail|skip|fixme|only))?\(\s*(['"`])(.*?)\1/g,
   );
   for (const [, , title] of titles) {
     const id = title.match(new RegExp(`^${ID}`))?.[0];

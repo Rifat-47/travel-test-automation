@@ -7,7 +7,7 @@ One document per feature, worked through in this order.
 | TRV-0 | [Smoke](TRV-0-smoke.md) | Automated |
 | TRV-1 | [Registration](TRV-1-registration.md) | Automated |
 | TRV-2 | [Login, logout and session](TRV-2-login.md) | Automated |
-| TRV-3 | Forgot and reset password | Planned |
+| TRV-3 | [Forgot and reset password](TRV-3-password-reset.md) | Automated |
 | TRV-4 | Navigation, footer and theme | Planned |
 | TRV-5 | Home | Planned |
 | TRV-6 | Destination list, search and filters | Planned |
