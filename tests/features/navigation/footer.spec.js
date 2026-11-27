@@ -1,5 +1,6 @@
 import { test, expect } from '../../../fixtures/test.js';
 import { Footer, FOOTER_LINKS } from '../../../pages/layout/footer.page.js';
+import { pageAddress } from '../../../pages/layout/navbar.page.js';
 import { siteSettings } from '../../../services/siteApi.js';
 
 const DEFAULT_TAGLINE = 'Discover the world, one destination at a time.';
@@ -47,7 +48,7 @@ test('TRV-4-NAV23 The footer links open their pages', async ({ page }) => {
   await page.goto('/about');
   for (const { name, path } of FOOTER_LINKS) {
     await footer.link(name).click();
-    await expect(page).toHaveURL(path);
+    await expect(page).toHaveURL(pageAddress(path));
   }
 });
 

@@ -41,3 +41,6 @@ export const PAGE_LINKS = [
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
+
+/** The address of a page; Destinations may add its page number once it loads. */
+export const pageAddress = (path) => new RegExp(`${path}(\\?page=1)?$`);

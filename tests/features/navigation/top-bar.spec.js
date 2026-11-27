@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/test.js';
 import { Footer } from '../../../pages/layout/footer.page.js';
-import { Navbar, PAGE_LINKS } from '../../../pages/layout/navbar.page.js';
+import { Navbar, PAGE_LINKS, pageAddress } from '../../../pages/layout/navbar.page.js';
 import { destinations, siteSettings } from '../../../services/siteApi.js';
 
 // Read in the browser; the string form keeps browser globals out of the test code.
@@ -25,7 +25,7 @@ test('TRV-4-NAV01 The top bar shows the main links', async ({ request }) => {
 test('TRV-4-NAV02 Each link opens its page', async ({ page }) => {
   for (const { name, path } of PAGE_LINKS) {
     await navbar.link(name).click();
-    await expect(page).toHaveURL(path);
+    await expect(page).toHaveURL(pageAddress(path));
     await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toBeVisible();
   }
 });
