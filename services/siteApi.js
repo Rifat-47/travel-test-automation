@@ -34,3 +34,27 @@ export async function posts(request) {
   const { results } = await getJson(request, 'blog/posts/', { page_size: 100 });
   return results.toSorted((a, b) => new Date(b.published_at) - new Date(a.published_at));
 }
+
+/** Every published destination as the list shows them, newest first unless params say otherwise. */
+export async function allDestinations(request, params = {}) {
+  return (await getJson(request, 'destinations/', { page_size: 500, ...params })).results;
+}
+
+/** Every published destination with its full details (description, creation time), newest first. */
+export async function destinationDetails(request) {
+  const list = await allDestinations(request);
+  // One at a time: the local server fails when asked for all of them at once.
+  const details = [];
+  for (const d of list) details.push(await getJson(request, `destinations/${d.slug}/`));
+  return details;
+}
+
+/** The destination categories, in the site's order. */
+export function destinationCategories(request) {
+  return getJson(request, 'core/categories/');
+}
+
+/** The countries that have a destination, A to Z. */
+export function destinationCountries(request) {
+  return getJson(request, 'core/countries/');
+}

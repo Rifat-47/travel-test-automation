@@ -42,3 +42,17 @@ export function failReply(page, request) {
 
 /** An empty page of results. */
 export const NO_RESULTS = { count: 0, next: null, previous: null, results: [] };
+
+/** The request Destinations makes for its list (any filters). */
+export const DESTINATION_LIST = isApi('destinations/');
+
+/** Answers the list request with these destinations, twelve to a page, as the server pages them. */
+export function replyWithPages(page, request, destinations, pageSize = 12) {
+  return page.route(request, (route) => {
+    const number = Number(new URL(route.request().url()).searchParams.get('page') || '1');
+    const results = destinations.slice((number - 1) * pageSize, number * pageSize);
+    return route.fulfill({
+      json: { count: destinations.length, next: null, previous: null, results },
+    });
+  });
+}
