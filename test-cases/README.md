@@ -8,7 +8,7 @@ One document per feature, worked through in this order.
 | TRV-1 | [Registration](TRV-1-registration.md) | Automated |
 | TRV-2 | [Login, logout and session](TRV-2-login.md) | Automated |
 | TRV-3 | [Forgot and reset password](TRV-3-password-reset.md) | Automated |
-| TRV-4 | Navigation, footer and theme | Planned |
+| TRV-4 | [Navigation, footer and theme](TRV-4-navigation.md) | Automated |
 | TRV-5 | Home | Planned |
 | TRV-6 | Destination list, search and filters | Planned |
 | TRV-7 | Destination details, plans and departures | Planned |
